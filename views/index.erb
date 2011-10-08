@@ -3,6 +3,7 @@
   <script src="/faye.js"></script>
   <script src="javascripts/coffee-script.js"></script>
   <script src="javascripts/batman.js"></script>
+  
   <script type="text/coffeescript">
     class MiniQ extends Batman.App
       @global yes
@@ -15,7 +16,7 @@
       constructor: (number, joinedAt) ->
         super()
         @set 'number', number
-        @set 'joinedAt', new Date().getTime()
+        @set 'joinedAt', joinedAt
     
       @accessor 'holdTime', ->
         Math.round((new Date() - @get('joinedAt')) * 0.001)
@@ -38,7 +39,7 @@
         caller.destroy()
   </script>
     
-  <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
   <style type="text/css">
     .phone-number {
      font-size: 30px; 

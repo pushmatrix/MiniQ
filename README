@@ -1,8 +1,9 @@
-Start your new app with "ahn start /path/to/your/app"
+Step 1: ahn create miniq
 
-If you wish to use Adhearsion to control Asterisk's dialplan,
-change the contexts you wish to be affected in your
-/etc/asterisk/extensions.conf file to the following:
+Step 2: Gemfile
 
-[your_context_name]
-exten => _X.,1,AGI(agi://1.2.3.4) ; This IP here
+Step 3: app.rb
+
+Step 4: views folder with index.erb
+
+Step 5: events.rb with bayeux
