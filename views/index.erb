@@ -17,10 +17,10 @@
         super()
         @set 'id', id
         @set 'number', number
-        @set 'joinedAt', joinedAt * 1000
+        @set 'joinedAt', joinedAt
 
       @accessor 'holdTime', ->
-        Math.round((new Date() - @get('joinedAt')) * 0.001)
+        Math.round (new Date() * 0.001) - @get('joinedAt')
 
       setInterval(=>
         @get('all').forEach (caller) ->
