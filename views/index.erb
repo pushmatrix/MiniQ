@@ -33,12 +33,10 @@
     client = new Faye.Client('/faye')
 
     client.subscribe '/caller/join', (caller) ->
-      console.log caller
       caller = new Caller(caller.id, caller.number, caller.joinedAt)
       caller.save()
 
     client.subscribe '/caller/leave', (caller) ->
-      console.log caller
       Caller.find caller.id, (errors, caller) ->
         caller.destroy()
   </script>
