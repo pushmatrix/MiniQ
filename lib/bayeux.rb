@@ -3,7 +3,7 @@ require 'net/http'
 require 'uri'
 
 module Bayeux
-  ENDPOINT = URI.parse('http://localhost:4567/faye')
+  ENDPOINT = URI.parse('http://localhost:4000/faye')
 
   def self.publish(channel, data)
     message = {'channel' => channel, 'data' => data.to_hash}
