@@ -3,6 +3,7 @@ source "http://rubygems.org"
 gem "adhearsion", ">= 1.2.1"
 gem "sinatra"
 gem "faye"
+gem "foreman"
 
 #
 # Here are some example components you might like to use. Simply

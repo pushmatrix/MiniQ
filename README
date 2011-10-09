@@ -1,9 +1,3 @@
-Step 1: ahn create miniq
+Step 1: bundle install
 
-Step 2: Gemfile
-
-Step 3: app.rb
-
-Step 4: views folder with index.erb
-
-Step 5: events.rb with bayeux
+Step 2: foreman start
