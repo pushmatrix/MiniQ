@@ -1,0 +1,70 @@
+<html>
+<head>
+  <title>MiniQ: <%=@queue_name%> </title>
+  <script src="/faye.js"></script>
+  <script src="/javascripts/coffee-script.js"></script>
+  <script src="/javascripts/batman.js"></script>
+
+  <script type="text/coffeescript">
+    class MiniQ extends Batman.App
+      @global yes
+
+    class Caller extends Batman.Model
+      @persist Batman.LocalStorage
+      @global yes
+      @encode 'number', 'joinedAt'
+
+      constructor: (id, number, joinedAt) ->
+        super()
+        @set 'id', id
+        @set 'number', number
+        @set 'joinedAt', joinedAt
+
+      @accessor 'holdTime', ->
+        Math.round (new Date() * 0.001) - @get('joinedAt')
+
+      setInterval(=>
+        @get('all').forEach (caller) ->
+          caller.set 'holdTime'
+      , 1000)
+
+    MiniQ.run()
+
+    client = new Faye.Client('/faye')
+
+    client.subscribe '/<%= @queue_name %>/join', (caller) ->
+      caller = new Caller(caller.id, caller.number, caller.joinedAt)
+      caller.save()
+
+      client.subscribe '/<%= @queue_name %>/leave', (caller) ->
+        Caller.find caller.id, (errors, caller) ->
+          caller.destroy()
+  </script>
+
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <style type="text/css">
+    .phone-number {
+     font-size: 30px;
+    }
+    .hold-time {
+     font-size: 25px;
+     float: right;
+     color: grey;
+     font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Mini Q :: <%=@queue_name%> Call 1-855-TRO-LOLO</h1>
+    <div class="well" data-foreach-caller="Caller.all.sortedBy.joinedAt">
+      <span class="phone-number" data-bind="caller.number"></span>
+      <span class="hold-time">
+        On hold for <span data-bind="caller.holdTime"></span> seconds
+      </span>
+    </div> <!-- /well -->
+
+  </div> <!-- /container -->
+</body>
+</html>
