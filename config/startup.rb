@@ -31,8 +31,8 @@ Adhearsion::Configuration.configure do |config|
   # The delimiter can also be specified in Asterisk's asterisk.conf.
   # This setting applies only to AGI.  The AMI delimiter is auto-detected.
   # NB: The AMI user should have write access in order to execute actions, and AMI connections will fail otherwise.
-  config.enable_asterisk :argument_delimiter => ','#, :listening_port => 4574
-  config.asterisk.enable_ami :host => "192.168.0.4", :username => "revisador", :password => "ruby", :events => true
+  config.enable_asterisk :argument_delimiter => ',', :listening_port => 4574
+  config.asterisk.enable_ami :host => "127.0.0.1", :username => "ahn_ami", :password => "password", :events => true
 
   # Adhearsion supports two possible speech engines with Asterisk: UniMRCP and Cepstral.
   # Uncomment one of the below if you have it available.
